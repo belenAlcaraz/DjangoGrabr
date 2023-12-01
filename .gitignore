@@ -1,0 +1,29 @@
+# Directorio donde se almacenan los archivos de caché generados por Python
+__pycache__/
+
+# Archivos de migraciones generados por Django
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+
+#Distribution
+.env
+django-venv/
+build/
+develop-eggs/
+
+# OSX #
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Unit tast
+.cache
+
+#PyBuilder
+target/
+
+.vscode/
+static/
+media/
