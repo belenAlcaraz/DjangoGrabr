@@ -28,8 +28,8 @@ class Comprador(models.Model):
 class Viajero(models.Model):
     usuario = models.OneToOneField(User,on_delete=models.CASCADE, related_name='viajero')
     foto_perfil =  models.ImageField(upload_to='viajeros/', blank=True, null=True)
-    ubicacion_actual =  models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
-    ubicacion_regreso = models.ForeignKey(Ubicacion, on_delete=models.CASCADE)
+    ubicacion_actual =  models.ForeignKey(Ubicacion, on_delete=models.CASCADE, related_name='ubicacion_viajero_actual')
+    ubicacion_regreso = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, related_name='ubicaciones_viajero_regreso')
     en_viaje = models.BooleanField(False)
 
     def __str__(self):
