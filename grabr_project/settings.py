@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cities_light',
     'delivery.apps.DeliveryConfig',
     'accounts.apps.AccountsConfig',
 ]
@@ -127,3 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['es']
+CITIES_LIGHT_INCLUDE_COUNTRIES = ['AR', 'US', 'CN','JP','DE']
+CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'ADM1'] 
