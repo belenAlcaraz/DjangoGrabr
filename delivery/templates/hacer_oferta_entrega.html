@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Hacer Oferta de Entrega{% endblock %}
+
+{% block content %}
+  <h1>Crear oferta para {{ producto.nombre }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <a type="submit" class="btn btn-success" href="{% url 'Inicio' %}">Enviar oferta</a>
+  </form>
+{% endblock %}

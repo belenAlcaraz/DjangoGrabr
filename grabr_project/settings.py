@@ -57,7 +57,7 @@ ROOT_URLCONF = 'grabr_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +134,7 @@ CITIES_LIGHT_INCLUDE_COUNTRIES = ['AR', 'US', 'CN','JP','DE']
 CITIES_LIGHT_INCLUDE_CITY_TYPES = ['PPL', 'ADM1'] 
 
 AUTH_USER_MODEL = 'accounts.User'
+
+#arreglar la redireccion
+LOGIN_REDIRECT_URL = 'Compra'
+LOGOUT_REDIRECT_URL = 'Inicio'

@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title %} Conectando compradores y viajeros al rededor del mundo {% endblock %}
+
+
+{% block content %}
+        
+<div class="row">
+    <div class="col-md-6">
+        <div>
+            <h1 class="text-start">Compra en el exterior de manera simple, fácil y segura</h1>
+            <p class="text-muted">Consigue esos productos que siempre quisiste, al precio más bajo y entregados por viajeros a tu ciudad.</p>
+            <a href="{% url 'Registro' %}" class="btn btn-primary">Compra con Grabr</a>
+            <button class="btn btn-success">Viaja con Grabr</button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="text-end">
+            <video width="100%" height="auto" controls>
+                <source src="{% static 'video/Video-grabr.mp4' %}" type="video/mp4">
+                Tu navegador no soporta la etiqueta de video.
+            </video>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

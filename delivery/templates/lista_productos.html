@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block title %} ¡Mis productos! {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for producto in productos %}
+      <div class="col-lg-4 mb-4"> 
+        <div class="card">
+          {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="card-img-top">
+          {% else %}
+            <img src="{% static 'path/to/placeholder-image.jpg' %}" alt="{{ producto.nombre }}" class="card-img-top">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ producto.nombre }}</h5>
+            <p class="card-text">{{ producto.descripcion }}</p>
+            <a href="{% url 'Detalle_producto' pk=producto.pk %}" class="btn btn-primary"> Ver detalles </a> 
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+
+{% block title %} Resumen del producto {% endblock %}
+
+{% block content %}
+<h1>Resumen del producto</h1>
+<div class="container">
+    <div class="card text-bg-light" style="max-width: 400px;">
+        {% if producto.imagen %}
+        <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+        {% else %}
+        <img src="{% static 'path/to/placeholder-image.jpg' %}" class="card-img-top" alt="{{ producto.nombre }}">
+        {% endif %}
+        <div class="card-body">
+            <h3 class="card-title">{{ producto.nombre }}</h3>
+            <p class="card-text">{{producto.descripcion}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ubicación de Compra: {{ producto.ubicacion_compra }}</li>
+            <li class="list-group-item">Ubicación de Entrega: {{ producto.ubicacion_entrega }}</li>
+            <li class="list-group-item">Recompensa: {{ producto.recompensa }}</li>
+            <li class="list-group-item">Estado: {{ producto.estado }}</li>
+        </ul>
+        <div class="card-body">
+          <h2>Ofertas de Entrega</h2>
+          {% if ofertas %}
+        <ul>
+            {% for oferta in ofertas %}
+                {% if oferta.estado == 'aceptado' %}
+                    <li>El viajero {{ oferta.viajero.usuario.username }} ha aceptado la oferta con un precio de ${{ oferta.precio_entrega }}.</li>
+                {% else %}
+                    <li>El viajero {{ oferta.viajero.usuario.username }} ofrece ${{ oferta.precio_entrega }}. Estado: {{ oferta.estado }}.</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+            {% else %}
+                <p>No hay ofertas de entrega disponibles.</p>
+            {% endif %}
+            {% if user.es_viajero %}
+                <a href="{% url 'Oferta_entrega' pk=producto.pk %}" class="btn btn-success">Hacer Oferta de Entrega</a>
+            {% endif %}
+            </div>
+
+    </div>
+
+
+    {% endblock %}
