@@ -17,7 +17,7 @@
           {% endif %}
           <div class="card-body">
             <h5 class="card-title">{{ producto.nombre }}</h5>
-            <p class="card-text">{{ producto.descripcion }}</p>
+            <p class="card-text">{{ producto.descripcion|truncatechars:150 }}</p>
             <a href="{% url 'Detalle_producto' pk=producto.pk %}" class="btn btn-primary"> Ver detalles </a> 
           </div>
         </div>
@@ -25,5 +25,6 @@
     {% endfor %}
   </div>
 </div>
+
 
 {% endblock %}

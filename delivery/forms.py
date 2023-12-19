@@ -21,10 +21,9 @@ class ProductoForm(forms.ModelForm):
 class OfertaDeEntregaForm(forms.ModelForm):
     class Meta:
         model = OfertaDeEntrega
-        fields = ['viajero', 'precio_entrega', 'fecha_entrega_estimada', 'estado']
+        fields = ['viajero', 'precio_entrega', 'fecha_entrega_estimada']
         widgets = {
         'viajero': forms.Select(attrs={'class': 'form-control'}),
         'precio_entrega': forms.NumberInput(attrs={'class': 'form-control'}),
-        'fecha_entrega_estimada': forms.TextInput(attrs={'class': 'form-control','placeholder': 'dd/mm/aaaa'}),
-        'estado': forms.Select(attrs={'class': 'form-control'}),
+        'fecha_entrega_estimada': forms.NumberInput(attrs={'type':'date', 'class': 'form-control','placeholder': 'dd/mm/aaaa'}),
     }

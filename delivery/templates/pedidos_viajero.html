@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} ¡Productos! {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for producto in productos %}
+      {% if producto.estado == 'pendiente' %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
+            {% else %}
+            <img src="{% static 'path/to/placeholder-image.jpg' %}" class="card-img-top" alt="{{ producto.nombre }}">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ producto.nombre }}</h5>
+              <p class="card-text">{{ producto.descripcion }}</p>
+              <p class="card-text"><small class="text-muted">Precio: ${{ producto.precio }}</small></p>
+              <a href="{% url 'Compra_detalle_viajero' pk=producto.pk %}" class="btn btn-primary"> Ver detalles </a> 
+              {% if not producto.oferta %}
+              <a href="{% url 'Oferta_entrega' pk=producto.pk %}" class="btn btn-success">Hacer Oferta de Entrega</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
