@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h1>¡Hola Viajero!</h1>
+            <h3 class="mb-4">{{ viajero.usuario.username }}</h3>
+            <img src="{{ viajero.foto_perfil.url }}" alt="Foto de perfil" class="rounded-circle mb-4" style="width: 100px; height: 100px;">
+            <br></br>
+            <h2>Estados de tus ofertas:</h2>
+            <ul class="list-group list-group-numbered">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Pendientes: <span class="badge bg-warning">{{ ofertas_pendientes }}</span></li>
+                    <li class="list-group-item">Aceptadas: <span class="badge bg-success">{{ ofertas_aceptadas }}</span></li>
+                    <li class="list-group-item">Entregadas: <span class="badge bg-primary">{{ ofertas_entregadas }}</span></li>
+                    <li class="list-group-item">Canceladas: <span class="badge bg-danger">{{ ofertas_entregadas }}</span></li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

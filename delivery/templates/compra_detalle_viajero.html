@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} Resumen del producto {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>{{ producto.nombre }}</h1>
+    <div class="row">
+        <div class="card text-bg-light" style="max-width: 400px;">
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            <div class="card-body">
+                <h3 class="card-title">{{ producto.nombre }}</h3>
+                <p class="card-text">{{producto.descripcion}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Ubicación de Compra: {{ producto.ubicacion_compra }}</li>
+                <li class="list-group-item">Ubicación de Entrega: {{ producto.ubicacion_entrega }}</li>
+                <li class="list-group-item">Recompensa: {{ producto.recompensa }}</li>
+                <li class="list-group-item">Estado: {{ producto.estado }}</li>
+            </ul>
+            <a href="{% url 'Oferta_entrega' producto.pk %}" class="btn btn-primary">Hacer Oferta</a>
+    </div>
+
+{% endblock %}

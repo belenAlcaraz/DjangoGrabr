@@ -2,21 +2,18 @@
 
 {% load static %}
 
-
 {% block title %} Resumen del producto {% endblock %}
 
 {% block content %}
 <h1>Resumen del producto</h1>
 <div class="container">
-    <div class="card text-bg-light" style="max-width: 400px;">
+    <div class="card text-bg-light" style="max-width: 800px;">
         {% if producto.imagen %}
         <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}">
-        {% else %}
-        <img src="{% static 'path/to/placeholder-image.jpg' %}" class="card-img-top" alt="{{ producto.nombre }}">
         {% endif %}
         <div class="card-body">
             <h3 class="card-title">{{ producto.nombre }}</h3>
-            <p class="card-text">{{producto.descripcion}}</p>
+            <p class="card-text">{{ producto.descripcion }}</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Ubicación de Compra: {{ producto.ubicacion_compra }}</li>
@@ -25,26 +22,46 @@
             <li class="list-group-item">Estado: {{ producto.estado }}</li>
         </ul>
         <div class="card-body">
-          <h2>Ofertas de Entrega</h2>
-          {% if ofertas %}
-        <ul>
-            {% for oferta in ofertas %}
-                {% if oferta.estado == 'aceptado' %}
-                    <li>El viajero {{ oferta.viajero.usuario.username }} ha aceptado la oferta con un precio de ${{ oferta.precio_entrega }}.</li>
+            <h2>Ofertas de Entrega</h2>
+            <div class="col-md-4">
+                {% if ofertas %}
+                    {% for oferta in ofertas %}
+                        <div class="row"> 
+                            <div class="col-md-12"> 
+                                <p>Viajero: {{ oferta.viajero.usuario.username }}</p>
+                                <p>Precio de entrega: {{ oferta.precio_entrega }}</p>
+                                <p>Fecha estimada de entrega:{{ oferta.fecha_entrega_estimada|date:"d/m/Y" }}</p>
+                            </div>
+
+                            <div class="col-md-12">
+                                {% if oferta.estado != 'entregado' and oferta.estado != 'cancelado' %}
+                                    <form method="post" action="{% url 'Aceptar_oferta' oferta.id %}" style="display: inline-block;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-success {% if producto.estado == 'completado' %}d-none{% endif %}" name="action" value="aceptar">Aceptar</button>
+                                    </form>
+                                    <form method="post" action="{% url 'Rechazar_oferta' oferta.id %}" style="display: inline-block;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger {% if producto.estado == 'completado' %}d-none{% endif %}" name="action" value="rechazar">Rechazar</button>
+                                    </form>
+                                {% elif oferta.estado == 'cancelado' %}
+                                    <button class="btn btn-secondary" disabled>Rechazado</button>
+                                {% elif oferta.estado == 'entregado' %}
+                                    <button class="btn btn-secondary" disabled>Completado</button>
+                                {% endif %}
+                                {% if producto.estado == 'en proceso' and oferta.estado == 'aceptado' %}
+                                    <form method="post" action="{% url 'Confirmar_recibido' oferta.id %}" style="display: inline-block;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary" name="action" value="confirmar_recibido">Confirmar Recibido</button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
                 {% else %}
-                    <li>El viajero {{ oferta.viajero.usuario.username }} ofrece ${{ oferta.precio_entrega }}. Estado: {{ oferta.estado }}.</li>
+                    <p>No hay ofertas para este producto.</p>
                 {% endif %}
-            {% endfor %}
-        </ul>
-            {% else %}
-                <p>No hay ofertas de entrega disponibles.</p>
-            {% endif %}
-            {% if user.es_viajero %}
-                <a href="{% url 'Oferta_entrega' pk=producto.pk %}" class="btn btn-success">Hacer Oferta de Entrega</a>
-            {% endif %}
             </div>
-
+        </div>
     </div>
-
-
-    {% endblock %}
+</div>
+{% endblock %}

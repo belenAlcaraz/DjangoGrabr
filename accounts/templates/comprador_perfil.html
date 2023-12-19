@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <h1 class="display-4">¡Hola Comprador!</h1>
+            <h3 class="mb-4">{{ comprador.usuario.username }}</h3>
+            <img src="{{ comprador.foto_perfil.url }}" alt="Foto de perfil" class="rounded-circle mb-4" style="width: 100px; height: 100px;">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Estados de tus pedidos</h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Pendientes: <span class="badge bg-warning">{{ pendientes_count }}</span></li>
+                        <li class="list-group-item">En proceso: <span class="badge bg-primary">{{ en_proceso_count }}</span></li>
+                        <li class="list-group-item">Completados: <span class="badge bg-success">{{ completados_count }}</span></li>
+                        <li class="list-group-item">Rechazados: <span class="badge bg-danger">{{ cancelados_count }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

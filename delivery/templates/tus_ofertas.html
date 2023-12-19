@@ -1,0 +1,116 @@
+<!-- tus_ofertas.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %} ¡Productos! {% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <h2>Productos con ofertas</h2>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pendientes-tab" data-bs-toggle="tab" data-bs-target="#pendientes-tab-pane"
+          type="button" role="tab" aria-controls="pendientes-tab-pane" aria-selected="true">Pendientes</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link " id="aceptados-tab" data-bs-toggle="tab" data-bs-target="#aceptados-tab-pane"
+          type="button" role="tab" aria-controls="aceptados-tab-pane" aria-selected="true">Aceptados</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="completados-tab" data-bs-toggle="tab" data-bs-target="#completados-tab-pane"
+          type="button" role="tab" aria-controls="completados-tab-pane" aria-selected="false">Completados</button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" id="cancelados-tab" data-bs-toggle="tab" data-bs-target="#cancelados-tab-pane"
+          type="button" role="tab" aria-controls="Cancelados" aria-selected="false">Cancelados</button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+
+      <div class="tab-pane fade show " id="pendientes-tab-pane" role="tabpanel" aria-labelledby="pendientes-tab"
+        tabindex="0">
+
+        {% for oferta in ofertas_pendientes %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+              <div class="card-body">
+                  <h5 class="card-title">{{ oferta.producto.nombre }}</h5>
+                  <p class="card-text">{{ oferta.producto.descripcion }}</p>
+                  <p class="card-text"><small class="text-muted">Precio: ${{ oferta.producto.precio }}</small></p>
+                  <a href="{% url 'Compra_detalle_viajero' pk=oferta.producto.pk %}" class="btn btn-primary">Detalles</a>
+              </div>
+            </div>
+        </div>
+        {% empty %}
+          <div class="col-md-12">
+              <p>No hay productos en esta categoría actualmente.</p>
+          </div>
+        {% endfor %}
+
+      </div>
+
+
+      <div class="tab-pane fade show " id="aceptados-tab-pane" role="tabpanel" aria-labelledby="aceptados-tab"
+        tabindex="0">
+
+        {% for oferta in ofertas_aceptadas %}
+        <div class="col-md-4 mb-4">
+          <div class="card">
+              <div class="card-body">
+                  <h5 class="card-title">{{ oferta.producto.nombre }}</h5>
+                  <p class="card-text">{{ oferta.producto.descripcion }}</p>
+                  <p class="card-text"><small class="text-muted">Precio: ${{ oferta.producto.precio }}</small></p>
+                  <a href="{% url 'Compra_detalle_viajero' pk=oferta.producto.pk %}" class="btn btn-primary">Detalles</a>
+              </div>
+            </div>
+        </div>
+        {% empty %}
+          <div class="col-md-12">
+              <p>No hay productos en esta categoría actualmente.</p>
+          </div>
+        {% endfor %}
+
+      </div>
+
+    
+
+      <div class="tab-pane fade show " id="completados-tab-pane" role="tabpanel" aria-labelledby="completados-tab"
+        tabindex="0">
+        {% for oferta in ofertas_completadas %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ oferta.producto.nombre }}</h5>
+                    <p class="card-text">{{ oferta.producto.descripcion }}</p>
+                    <p class="card-text"><small class="text-muted">Precio: ${{ oferta.producto.precio }}</small></p>
+                    <a href="{% url 'Compra_detalle_viajero' pk=oferta.producto.pk %}" class="btn btn-primary">Detalles</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="tab-pane fade show " id="cancelados-tab-pane" role="tabpanel" aria-labelledby="cancelados-tab"
+        tabindex="0">
+        {% for oferta in ofertas_canceladas %}
+          <div class="col-md-4 mb-4">
+              <div class="card">
+                  <div class="card-body">
+                      <h5 class="card-title">{{ oferta.producto.nombre }}</h5>
+                      <p class="card-text">{{ oferta.producto.descripcion }}</p>
+                      <p class="card-text"><small class="text-muted">Precio: ${{ oferta.producto.precio }}</small></p>
+                      <a href="{% url 'Compra_detalle_viajero' pk=oferta.producto.pk %}" class="btn btn-primary">Detalles</a>
+                  </div>
+              </div>
+          </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
