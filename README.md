@@ -36,7 +36,7 @@ Django Grabr es una aplicación inspirada en el concepto de la plataforma Grabr.
 1. **Clonar el Repositorio:**
 
     ```bash
-    git clone https://github.com/tuusuario/django-grabr.git
+    git clone https://github.com/belenAlcaraz/DjangoGrabr.git
     ```
 
 2. **Instalar las Dependencias:**
